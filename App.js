@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { NavigationContainer, createStaticNavigation,
-  useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './Home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,9 +9,9 @@ import { Profile } from './Profile';
 import { Button } from '@react-navigation/elements';
 import { Quiz } from './Quiz';
 import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
 
-const Tab = createBottomTabNavigator();
-
+const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator();
 
 function Tabs() {
@@ -26,7 +25,7 @@ function Tabs() {
 }
 function RootStack() {
   const navigation = useNavigation()
-  const xp = 0
+  const [xp, setXp] = useState(0)
   return (
     <Stack.Navigator initialRouteName='Main'>
       <Stack.Screen name="Main" component={Tabs} options={{headerLeft: () => (
@@ -35,7 +34,7 @@ function RootStack() {
             <Text>{`${xp} XP`}</Text>
           )}}/>
       <Stack.Screen name="Profile" component={Profile}/>
-      <Stack.Screen name="Quiz" component={Quiz} options={{headerRight: () => (
+      <Stack.Screen name="Quiz" component={Quiz} initialParams={{xp: xp, setXp: setXp}} options={{headerRight: () => (
             <Text>{`${xp} XP`}</Text>
           )}}/>
     </Stack.Navigator>

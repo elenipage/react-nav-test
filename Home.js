@@ -1,23 +1,24 @@
-import { Button } from '@react-navigation/elements';
-import { StyleSheet, Text, View } from 'react-native';
-import { createStaticNavigation,
-    useNavigation } from '@react-navigation/native';
+import { Button } from "@react-navigation/elements";
+import { StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export function HomeScreen() {
-    const navigation = useNavigation();
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button onPress={() => navigation.navigate('Quiz')}>Take a Quiz</Button>
-      </View>
-    );
-  }
-
-  const styles = StyleSheet.create({
-    container: {
+  const insets = useSafeAreaInsets;
+  const navigation = useNavigation();
+  return (
+    <View style={{
       flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+    }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate("Quiz")}>Take a Quiz</Button>
+    </View>
+  );
+}
+
